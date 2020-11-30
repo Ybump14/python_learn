@@ -1,6 +1,0 @@
-{
-  "request_method": "POST",
-  "request_api": "/api/businessUnit/save.json",
-  "request_name": "新增单位",
-  "request_data": {}
-}

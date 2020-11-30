@@ -1,11 +1,16 @@
 import csv
 import json
+import os
 
 '''生成json文件函数'''
 
 
-def create_json_file(file_name, request_method, request_api, request_name):
-    with open("E:\python_learn\data/" + file_name + ".json", 'w', encoding="utf-8") as f:
+def create_json_file(mkdir, file_name, request_method, request_api, request_name):
+    if os.path.exists("E:\python_learn\data/" + mkdir):
+        pass
+    else:
+        os.mkdir("E:\python_learn\data/" + mkdir)
+    with open(("E:\python_learn\data/" + mkdir + "/") + file_name + ".json", 'wt', encoding="utf-8") as f:
         data = {
             "request_method": request_method,
             "request_api": request_api,
@@ -20,7 +25,8 @@ def create_json_file(file_name, request_method, request_api, request_name):
 with open("E:\python_learn\data/python.csv", 'r') as f:
     f_csv = csv.DictReader(f)
     for row in f_csv:
-        create_json_file(file_name=row['file_name'],
+        create_json_file(mkdir=row['mkdir'],
+                         file_name=row['file_name'],
                          request_method=row['request_method'],
                          request_api=row['request_api'],
                          request_name=row['request_name'])
