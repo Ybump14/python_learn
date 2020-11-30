@@ -1,0 +1,6 @@
+{
+  "request_method": "POST2",
+  "request_api": "/api/businessUnit/save.json2",
+  "request_name": "新增单位2",
+  "request_data": {}
+}
