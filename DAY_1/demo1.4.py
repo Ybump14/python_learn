@@ -21,9 +21,9 @@ portfolio = [
     {'name': 'YHOO', 'shares': 45, 'price': 16.35},
     {'name': 'ACME', 'shares': 75, 'price': 115.65}
 ]
-cheap = heapq.nsmallest(1, portfolio, key=lambda s: s['price'])  # 在对每个元素进行对比的时候，会以 price 的值进行比较
+cheap = heapq.nsmallest(3, portfolio, key=lambda s: s['price'])  # 在对每个元素进行对比的时候，会以 price 的值进行比较
 '''[{'name': 'YHOO', 'shares': 45, 'price': 16.35}]'''
-expensive = heapq.nlargest(1, portfolio, key=lambda s: s['price'])  # 在对每个元素进行对比的时候，会以 price 的值进行比较
+expensive = heapq.nlargest(3, portfolio, key=lambda s: s['price'])  # 在对每个元素进行对比的时候，会以 price 的值进行比较
 '''[{'name': 'AAPL', 'shares': 50, 'price': 543.22}]'''
 
 
