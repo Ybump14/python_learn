@@ -4,7 +4,7 @@
 
 解决方案:
 为了能控制一个字典中元素的顺序，你可以使用 collections 模块中的 OrderedDict 类。
-在迭代操作的时候它会保持元素被插入时的顺序
+在迭代操作的时候它会保持元素被插入时的顺序.
 '''
 
 from collections import OrderedDict
