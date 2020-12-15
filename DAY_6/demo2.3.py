@@ -28,11 +28,11 @@ print([addr for addr in addresses if fnmatchcase(addr, '54[0-9][0-9] *CLARK*')])
 
 dict_abc = {
     'ACME': 45.23,
-    'AAPL': 612.78,
+    'aaPL': 612.78,
     'IBM': 205.55,
     'HPQ': 37.20,
     'FB': 10.75
 }
 
-print([value for key, value in dict_abc.items() if fnmatchcase(key, '*A*')])  # 大小写敏感
-print([value for key, value in dict_abc.items() if fnmatch(key, '*a*')])  # Windows下大小写不敏感
+print([value for key, value in dict_abc.items() if fnmatchcase(key, '*A*')])  # 大小写敏感 [45.23]
+print([value for key, value in dict_abc.items() if fnmatch(key, '*a*')])  # Windows下大小写不敏感 [45.23, 612.78]
