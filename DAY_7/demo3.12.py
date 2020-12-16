@@ -17,7 +17,7 @@ print(c.seconds)  # 37800
 print(c.seconds / 3600)  # 10.5
 print(c.total_seconds() / 3600)  # 58.5
 
-# datetime 的实例使用标准的数学运算
+# datetime 的实例使用标准的数学运算.
 a = datetime(2012, 9, 23)
 print(a)
 print(a + timedelta(days=10, hours=6, seconds=60, minutes=5, weeks=1))

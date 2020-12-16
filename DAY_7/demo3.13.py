@@ -29,5 +29,5 @@ def get_previous_byday(dayname, start_date=None):
     return target_date
 
 
-print(datetime.today())  # 2020-12-16 Wednesday
-print(get_previous_byday('Monday'))  # 2020-12-14 Monday
+print(datetime.today())  # 2020-12-16 Wednesday.
+print(get_previous_byday('Monday'))  # 2020-12-14 Monday.
