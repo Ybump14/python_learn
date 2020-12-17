@@ -5,7 +5,7 @@
 解决方案:
 为了执行不同时间单位的转换和计算，请使用 datetime 模块。'''
 
-from datetime import timedelta
+from datetime import timedelta, date
 from datetime import datetime
 
 a = timedelta(days=2, hours=6)
@@ -36,5 +36,12 @@ print((a - b).days)
 c = datetime(2013, 3, 1)
 d = datetime(2013, 2, 28)
 print((c - d).days)
+
+JOJO = date(1994, 7, 14)
+JJ = date(1996, 1, 29)
+JOJO_day = (date.today() - JOJO).days / 365
+JJ_day = (date.today() - JJ).days / 365
+print('JOJO出生%s天啦' % (date.today() - JOJO).days, JOJO_day, '岁')
+print('JJ出生%s天啦' % (date.today() - JJ).days, JJ_day, '岁')
 
 
