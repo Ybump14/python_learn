@@ -6,12 +6,9 @@
 Python的 datetime 模块中有工具函数和类可以帮助你执行这样的计算。
 下面是对类似这样的问题的一个通用解决方案'''
 
-"""
-Topic: 最后的周五
-Desc :
-"""
-
 from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
+from dateutil.rrule import *
 
 weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday',
             'Friday', 'Saturday', 'Sunday']
@@ -29,5 +26,23 @@ def get_previous_byday(dayname, start_date=None):
     return target_date
 
 
-print(datetime.today())  # 2020-12-16 Wednesday.
+print(datetime.today())  # 2020-12-17 Thursday.
 print(get_previous_byday('Monday'))  # 2020-12-14 Monday.
+print(get_previous_byday('Thursday'))  # 2020-12-10 Thursday.
+print(format('分割线', '*^24s'))
+d = datetime.now()  # 2020-12-17 Thursday
+
+# 若今天是本周的TH,那么上一个TH就是今天
+# 还未到本周的FR,那么上一个FR就是上一周的FR
+# 以两组例子观察
+print(d + relativedelta(weekday=MO(-1)))  # 2020-12-14
+print(d + relativedelta(weekday=TU(-1)))  # 2020-12-17
+print(d + relativedelta(weekday=WE(-1)))  # 2020-12-16
+print(d + relativedelta(weekday=TH(-1)))  # 2020-12-17
+print(d + relativedelta(weekday=FR(-1)))  # 2020-12-11
+print(format('分割线', '*^24s'))
+print(d + relativedelta(weekday=MO(-2)))  # 2020-12-07
+print(d + relativedelta(weekday=TU(-2)))  # 2020-12-08
+print(d + relativedelta(weekday=WE(-2)))  # 2020-12-09
+print(d + relativedelta(weekday=TH(-2)))  # 2020-12-10
+print(d + relativedelta(weekday=FR(-2)))  # 2020-12-04
