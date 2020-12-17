@@ -6,11 +6,29 @@
 使用Python的标准模块 datetime 可以很容易的解决这个问题'''
 
 from datetime import datetime
+import time, timeit
 
 text = '2012-09-20'
-y = datetime.strptime(text, '%Y-%m-%d')
-z = datetime.now()
-diff = z - y
-print(diff)
-print(y)
-print(z)
+# strptime() 的性能较差,它是使用纯Python实现
+print(datetime.strptime(text, '%Y-%m-%d'))
+print(format('分割线', '*^17s'))
+
+
+def parse_ymd(s):
+    year_s, month_s, day_s = s.split('-')
+    return datetime(int(year_s), int(month_s), int(day_s))
+
+
+start = time.perf_counter()
+print(start)
+print(parse_ymd('2012-09-20'))
+end = time.perf_counter()
+print(end)
+print('Running time is:%s Seconds' % (end - start))
+
+print(format('分割线', '*^17s'))
+
+start = time.perf_counter()
+print(datetime.strptime('2012-09-20', '%Y-%m-%d'))
+end = time.perf_counter()
+print('Running time is:%s Seconds' % (end - start))
