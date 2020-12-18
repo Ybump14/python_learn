@@ -45,7 +45,6 @@ print('\n')
 
 for i in reversed(Countdown(9)):
     print(format(i, '^2'), end='')  # 1 2 3 4 5 6 7 8 9
-
 print('\n')
 
 
