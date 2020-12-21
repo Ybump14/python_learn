@@ -7,6 +7,10 @@
 from collections import defaultdict
 
 my_list = ['a', 'b', 'c']
+for idx, val in enumerate(my_list, 0):
+    print(idx, val)
+
+my_list = ['a', 'b', 'c']
 for idx, val in enumerate(my_list, 1):
     print(idx, val)
 
