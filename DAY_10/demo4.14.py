@@ -33,5 +33,5 @@ def flatten_yield(items, ignore_types=(str, bytes)):
             yield x
 
 
-print(list(flatten_for(items)))
-print(list(flatten_yield(items)))
+print(list(flatten_for(items)))  # ['Dave', 'Paula', 'Thomas', 'Lewis']
+print(list(flatten_yield(items)))  # ['Dave', 'Paula', 'Thomas', 'Lewis']
