@@ -10,7 +10,7 @@ import csv
 from collections import namedtuple
 
 
-def read_csv():
+def read_csv1():
     with open('stocks.csv') as f:
         f_csv = csv.reader(f)
         headers = next(f_csv)
@@ -18,18 +18,16 @@ def read_csv():
             print(row)
 
 
-def read_csv_tuple():
+def read_csv2():
     with open('stocks.csv') as f:
         f_csv = csv.reader(f)
         headings = next(f_csv)
         Row = namedtuple('Row', headings)
         for r in f_csv:
             row = Row(*r)
-            print(row.Symbol, row.Price, row.Date, row.Time, row.Change, row.Volume)
-
-def read_csv_dict():
-    with open('stocks.csv') as f:
-        f_csv = csv.DictReader(f)
-        for row in f_csv:
             print(row)
+            # print(row.Symbol, row.Price, row.Date, row.Time, row.Change, row.Volume)
 
+
+read_csv1()
+read_csv2()
