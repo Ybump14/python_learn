@@ -27,7 +27,7 @@ class linehistory:
 
 
 def rr():
-    with open('E:\python_learn/data/python_test.csv') as f:
+    with open('E:\python_learn/python-cookbook/data/python_test.csv') as f:
         lines = linehistory(f)
         for line in lines:
             if 'python' in line:
@@ -39,7 +39,7 @@ def xx(case):
     if str(case) == '1':
         # 1
         print('case%s:' % case)
-        with open('E:\python_learn/data/python_test.csv') as f:
+        with open('E:\python_learn/python-cookbook/data/python_test.csv') as f:
             lines1 = linehistory(f)
             # print(next(lines))  # TypeError: 'list' object is not an iterator
             it1 = lines1.__iter__()
@@ -51,7 +51,7 @@ def xx(case):
     elif str(case) == '2':
         # 2
         print('case%s:' % case)
-        with open('E:\python_learn/data/python_test.csv') as f:
+        with open('E:\python_learn/python-cookbook/data/python_test.csv') as f:
             lines2 = linehistory(f)
             # print(next(lines))  # TypeError: 'list' object is not an iterator
             it2 = iter(lines2)

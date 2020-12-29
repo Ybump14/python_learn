@@ -19,9 +19,9 @@ filename.startswith('spam')  # True
 url.startswith('http://www.python.org')  # True
 url.endswith('.org')  # True
 filenames = os.listdir(
-    '../DAY_1')  # ['demo1.1.py', 'demo1.2.py', 'demo1.3.py', 'demo1.4.py', 'demo3.12.py', 'demo6.1.py', 'test.py']
+    '../DAY_1')  # ['demo1.1.py', 'demo1.2.py', 'demo1.3.py', 'demo1.4.py', 'demo3.12.py', 'demo6.1.py', 'test_demo.py']
 print([name for name in filenames if
-       name.startswith(('demo1.', 'test'))])  # ['demo1.1.py', 'demo1.2.py', 'demo1.3.py', 'demo1.4.py', 'test.py']
+       name.startswith(('demo1.', 'test'))])  # ['demo1.1.py', 'demo1.2.py', 'demo1.3.py', 'demo1.4.py', 'test_demo.py']
 
 
 def read_data(name):
@@ -33,6 +33,6 @@ def read_data(name):
 
 
 url = 'http://www.python.org'
-urls = 'E:\python_learn/DAY_6/demo2.2.py'
+urls = 'E:\python_learn/python-cookbook/DAY_6/demo2.2.py'
 read_data(url)  # return 'http://www.python.org' content
 read_data(urls)  # return 'demo2.2.py' content

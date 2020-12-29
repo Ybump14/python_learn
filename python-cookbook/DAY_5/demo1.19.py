@@ -9,7 +9,7 @@ import os
 nums = [1, 2, 3, 4, 5]
 s = sum(x * x for x in nums)
 
-files = os.listdir('E:\python_learn/data/')  # Sorry, no python.
+files = os.listdir('E:\python_learn/python-cookbook/data/')  # Sorry, no python.
 if any(name.endswith('.py') for name in files):
     print('There be python!')
 else:

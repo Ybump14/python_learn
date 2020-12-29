@@ -12,11 +12,11 @@ a = [1, 2, 3, 4]
 
 # 反向迭代仅仅当对象的大小可预先确定或者对象实现了 __reversed__() 的特殊方法时才能生效。
 # 如果两者都不符合，那你必须先将对象转换为一个列表才行
-with open('E:\python_learn/data/python.csv') as f:
+with open('E:\python_learn/python-cookbook/data/python.csv') as f:
     print([line for line in f])
 
 
-# with open('E:\python_learn/data/python.csv') as f:
+# with open('E:\python_learn/python-cookbook/data/python.csv') as f:
 #     for line in reversed((f)):  # TypeError： _io.TextIOWrapper
 #         print(line, end='')
 
