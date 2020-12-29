@@ -36,12 +36,15 @@ make_element('item', 'Albatross', size='large', quantity=6)
 make_element('p', '<spam>')
 
 
-def anyargs(*args, **kwargs):
+def anyargs(x, *args, y, **kwargs):
+    print(x)
     print(args)  # A tuple
+    print(y)
     print(kwargs)  # A dict
 
 
-anyargs(1, 2, 3, a=1, b=2)
-
-# (1, 2, 3)
+anyargs(1, 2, 3, 4, 5, 6, y=7, a=1, b=2)
+# 1
+# (2, 3, 4, 5, 6)
+# 7
 # {'a': 1, 'b': 2}
