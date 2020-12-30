@@ -20,12 +20,12 @@ def parse_ymd(s):
 
 
 start = time.perf_counter()
-print(parse_ymd('2012-09-20'))
+print(parse_ymd('2012-09-20'))  # 2012-09-20 00:00:00
 end = time.perf_counter()
-print(format((end - start), '0.7f'))
+print(format((end - start), '0.7f'))  # 2012-09-20 00:00:00
 print(format('分割线', '*^17s'))
 
 start = time.perf_counter()
-print(datetime.strptime('2012-09-20', '%Y-%m-%d'))
+print(datetime.strptime('2012-09-20', '%Y-%m-%d'))  # 2012-09-20 00:00:00
 end = time.perf_counter()
 print(format((end - start), '0.7f'))
