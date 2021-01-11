@@ -111,9 +111,10 @@ if __name__ == '__main__':
     print(s2.name, s2.shares, s2.price)
     s3 = Stock('ACME', shares=50, price=91.1)
     print(s3.name, s3.shares, s3.price)
+    s4 = Stock(name='ACME', shares=50, price=91.1)
+    print(s4.name, s4.shares, s4.price)
 
 
-    #
     # s3 = Stock('ACME', shares=50, price=91.1, aa=1)
     # print(s3.name, s3.shares, s3.price)
     # raise TypeError('Invalid argument(s): {}'.format(','.join(kwargs)))
