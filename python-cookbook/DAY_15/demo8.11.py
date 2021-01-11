@@ -67,7 +67,6 @@ class Structure3:
 
         # Set the additional arguments (if any)
         extra_args = kwargs.keys() - self._fields
-        print(extra_args)
 
         for name in extra_args:
             setattr(self, name, kwargs.pop(name))
@@ -111,5 +110,5 @@ if __name__ == '__main__':
 
 
     # s1 = Stock('ACME', 50, 91.1)
-    s2 = Stock('ACME', 50, 91.1, date='8/2/2012', JOJO='YANGJIAJUN')
-
+    s2 = Stock('ACME', 50, 91.1, date='8/2/2012', MyName='YANGJIAJUN')
+    print(s2.name, s2.shares, s2.price, s2.MyName, sep=' ')  # ACME 50 91.1 YANGJIAJUN
