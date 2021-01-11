@@ -38,9 +38,51 @@ class Point:
         self.y = y
 
 
-p = Point(2, 3)
-print(p.x)
-print(p.y)
-p.x = 11
-print(p.x)
+# p = Point(2, 3)
+# print(p.x)
+# print(p.y)
+# p.x = 11
+# print(p.x)
 # p.y = 'wq'  TypeError: Expected an int
+
+# class A:
+#     def __init__(self):
+#         self.a1 = 'a1'
+#         print('A.init')
+#
+#
+# class B:
+#     x = A()
+#     def __init__(self):
+#         print('B.init')
+#
+# print('****************')
+# print(B.x.a1)
+#
+# print('----------------')
+# b = B()
+# print(b.x.a1)
+
+
+class A:
+    def __init__(self):
+        self.a1 = 'a1'
+        print('A.init')
+
+    def __get__(self, instance, owner):
+        print("A.__get__ {} {} {}".format(self, instance, owner))
+
+
+class B:
+    x = A()
+
+    def __init__(self):
+        print('B.init')
+
+
+print('****************')
+print(B.x)
+
+print('----------------')
+b = B()
+print(b.x)
