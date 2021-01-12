@@ -36,6 +36,6 @@ a, b, c = data.values()
 p = (4, 5)
 x, y, z = p
 '''Traceback (most recent call last):
-  File "E:/python_learn/chapter 1/demo1.1.py", line 19, in <module>
+  File "E:/python_learn/chapter01/demo1.1.py", line 19, in <module>
     x, y, z = p
 ValueError: not enough values to unpack (expected 3, got 2)'''
