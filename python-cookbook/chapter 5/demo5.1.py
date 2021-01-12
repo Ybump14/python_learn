@@ -20,11 +20,11 @@ def output():
 
 
 def first():
-    # Write chunks of text data
+    # Write chunks of text chapterData
     with open('somefile.txt', 'wt', encoding='utf8') as f:
         # f.write(text1)
         # f.write(text2)
-        
+
         # 将 print() 函数的输出重定向到一个文件中去，指定 file 关键字参数，如下
         # 但是有一点要注意的就是文件必须是以文本模式打开。
         # 如果文件是二进制模式的话，打印就会出错

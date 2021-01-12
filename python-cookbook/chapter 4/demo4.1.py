@@ -8,7 +8,7 @@
 
 
 def manual_iter():
-    with open('E:\python_learn/python-cookbook/data/python.csv') as f:
+    with open('E:\python_learn/python-cookbook/chapterData/python.csv') as f:
         try:
             while True:
                 line = next(f)
@@ -18,7 +18,7 @@ def manual_iter():
 
 
 def manual_iter_other():
-    with open('E:\python_learn/python-cookbook/data/python.csv') as f:
+    with open('E:\python_learn/python-cookbook/chapterData/python.csv') as f:
         while True:
             line = next(f, None)
             if line is None:

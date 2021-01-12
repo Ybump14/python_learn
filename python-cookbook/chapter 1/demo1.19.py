@@ -9,7 +9,7 @@ import os
 nums = [1, 2, 3, 4, 5]
 s = sum(x * x for x in nums)
 
-files = os.listdir('E:\python_learn/python-cookbook/data/')  # Sorry, no python.
+files = os.listdir('E:\python_learn/python-cookbook/chapterData/')  # Sorry, no python.
 if any(name.endswith('.py') for name in files):
     print('There be python!')
 else:
@@ -19,7 +19,7 @@ else:
 s = ('ACME', 50, 123.45)
 print(','.join(str(x) for x in s))  # ACME,50,123.45
 
-# Data reduction across fields of a data structure
+# Data reduction across fields of a chapterData structure
 portfolio = [
     {'name': 'GOOG', 'shares': 50},
     {'name': 'YHOO', 'shares': 75},

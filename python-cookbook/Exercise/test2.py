@@ -14,10 +14,10 @@ def echo(value=None):
 generator = echo(1)
 print(generator)
 print(next(generator))
-# print(next(generator))
-# print(generator.send(2))
-# generator.throw(TypeError, "spam")
-# generator.close()
+print(next(generator))
+print(generator.send(2))
+generator.throw(TypeError, "spam")
+generator.close()
 
 
 

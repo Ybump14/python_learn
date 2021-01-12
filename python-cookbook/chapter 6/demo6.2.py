@@ -16,7 +16,7 @@ data = {
 json_str = json.dumps(data)
 print(json_str)
 
-# print(type(data))  # <class 'dict'>
+# print(type(chapterData))  # <class 'dict'>
 # print(type(json_str))  # <class 'str'>
 
 with open('stocks.json', 'w') as f:
