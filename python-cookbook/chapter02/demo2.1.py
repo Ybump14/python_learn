@@ -25,4 +25,14 @@ print(''.join(v + d for v, d in zip(values, delimiters)))
 # str.join(sequence)
 str = "-"
 seq = ("a", "b", "c")  # 字符串序列
-print(str.join(seq))  # Outputs a-b-c
+print("".join(seq))  # Outputs a-b-c
+
+data = "@1222_finishPeriodBorrowBalance+@1223_finishPeriodBorrowBalance+@1224_finishPeriodBorrowBalance"
+bb = "@1222_finishPeriodBorrowBalance;@1223_finishPeriodBorrowBalance;@1224_finishPeriodBorrowBalance;"
+sub = bb.split(';')
+# print(sub)
+
+for i in sub:
+    a = i.split('_')
+    if len(a) > 1:
+        print(a[0].replace('@', ''),a[1])
