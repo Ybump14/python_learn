@@ -29,7 +29,7 @@ data = ("AAA", ("BBB", "CCC"))
 data = {"AAA": "aaa", "BBB": "bbb", "CCC": "ccc"}
 
 a, b, c = data.keys()
-a, b, c = data  # 默认迭代的是keys,等同a, b, c = chapterData.keys()
+a, b, c = data  # 默认迭代的是keys,等同a, b, c = data.keys()
 a, b, c = data.values()
 (a, a1), (b, b1), (c, c1) = data.items()
 
