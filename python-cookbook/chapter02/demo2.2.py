@@ -19,9 +19,9 @@ filename.startswith('spam')  # True
 url.startswith('http://www.python.org')  # True
 url.endswith('.org')  # True
 filenames = os.listdir(
-    '../chapter01')  # ['demo1.1.py', 'demo1.2.py', 'demo1.3.py', 'demo1.4.py', 'demo3.12.py', 'demo6.1.py', 'test_demo.py']
+    '../chapter01')  # ['demo1.1.py', 'demo1.2.py', 'demo1.3.py', 'demo1.4.py', 'demo3.12.py', 'demo6.1.py', 'test4.py']
 print([name for name in filenames if
-       name.startswith(('demo1.', 'test'))])  # ['demo1.1.py', 'demo1.2.py', 'demo1.3.py', 'demo1.4.py', 'test_demo.py']
+       name.startswith(('demo1.', 'test'))])  # ['demo1.1.py', 'demo1.2.py', 'demo1.3.py', 'demo1.4.py', 'test4.py']
 
 
 def read_data(name):
