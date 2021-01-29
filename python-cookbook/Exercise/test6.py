@@ -1,9 +1,41 @@
 import json
 import re
-import time
-
 import crawlertool as tool
 from bs4 import BeautifulSoup
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, String, Integer
+
+
+def sql_connect():
+    # 创建数据库连接
+    engine = create_engine("mysql://root:root@localhost:3306/test?charset=utf8", encoding='utf-8')
+    # 创建DBSession类型
+    DBSession = sessionmaker(bind=engine)
+    # 创建session对象
+    session = DBSession()
+    Base.metadata.create_all(engine)
+    return session
+
+
+Base = declarative_base()
+
+
+class SpiderDouban(Base):
+    __tablename__ = 'spiderdouban'
+
+    id = Column(Integer, primary_key=True)
+    url = Column(String(255))
+    title_chinese = Column(String(255))
+    title_others = Column(String(255))
+    director = Column(String(255))
+    year = Column(String(255))
+    country = Column(String(255))
+    classify = Column(String(255))
+    rating_num = Column(String(255))
+    rating_people = Column(String(255))
+    quote = Column(String(255))
 
 
 class SpiderDoubanMovieTop250(tool.abc.SingleSpider):
@@ -26,7 +58,6 @@ class SpiderDoubanMovieTop250(tool.abc.SingleSpider):
 
     def running(self):
         movie_list = []
-
         for page_num in range(10):
             url = "https://movie.douban.com/top250?start={0}&filter=".format(page_num * 25)
 
@@ -41,7 +72,7 @@ class SpiderDoubanMovieTop250(tool.abc.SingleSpider):
                 title_text = movie_label.select_one("li > div > div.info > div.hd > a").text.replace("\n",
                                                                                                      "")  # 提取标题行内容+清除换行符
                 title_chinese = title_text.split("/")[0].strip()  # 提取中文标题+清除前后空格
-                # title_other = [title.strip() for title in title_text.split("/")[1:]]  # 提取其他标题+清除前后空格
+                title_other = [title.strip() for title in title_text.split("/")[1:]]  # 提取其他标题+清除前后空格
 
                 # 解析内容信息(因长度原因，大部分主演名字不全暂不解析)
                 info_text = movie_label.select_one("li > div > div.info > div.bd > p:nth-child(1)").text  # 获取说明部分内容
@@ -50,7 +81,7 @@ class SpiderDoubanMovieTop250(tool.abc.SingleSpider):
                 info_line_1, info_line_2 = info_text.split("\n")[0:2]  # 获取第1行内容信息:包括导演和主演、获取第2行内容信息:包括年份、国家和类型
                 director = re.sub(" *(主演|主\\.{3}|\\.{3}).*$", "", info_line_1)  # 仅保留导演部分
                 year = int(re.search("[0-9]+", info_line_2.split("/")[0]).group())  # 提取电影年份并转换为数字
-                # country = info_line_2.split("/")[1].strip() if len(info_line_2.split("/")) >= 2 else None  # 提取电影国家
+                country = info_line_2.split("/")[1].strip() if len(info_line_2.split("/")) >= 2 else None  # 提取电影国家
                 classify = info_line_2.split("/")[2].strip() if len(info_line_2.split("/")) >= 3 else None  # 提取电影类型
                 classify = re.split(" +", classify)  # 将电影类型转换为list形式
 
@@ -64,38 +95,28 @@ class SpiderDoubanMovieTop250(tool.abc.SingleSpider):
                 rating_people = int(re.search("[0-9]+", rating_people).group())  # 将评分人数转换为数字
 
                 # 解析评价(该标签可能会不存在)
-                # quote_label = movie_label.select_one("li > div > div.info > div.bd > p.quote")
-                # if quote_label:
-                #     quote = quote_label.text.replace("\n", "")  # 提取评价+清除换行符
-                # else:
-                #     quote = None
+                quote_label = movie_label.select_one("li > div > div.info > div.bd > p.quote")
+                if quote_label:
+                    quote = quote_label.text.replace("\n", "")  # 提取评价+清除换行符
+                else:
+                    quote = None
 
                 movie_list.append({
-                    "链接": url,
-                    "名称": title_chinese,
-                    # "title_others": title_other,
-                    "信息": director,
-                    "年份": year,
-                    # "country": country,
-                    "分类": classify,
-                    "评分": rating_num,
-                    "评价人数": rating_people,
-                    # "quote": quote
+                    "url": url,
+                    "title_chinese": title_chinese,
+                    "title_others": title_other,
+                    "director": director,
+                    "year": year,
+                    "country": country,
+                    "classify": classify,
+                    "rating_num": rating_num,
+                    "rating_people": rating_people,
+                    "quote": quote
                 })
 
-            time.sleep(5)
+            # time.sleep(5)
 
         return movie_list
-
-
-# # ------------------- 单元测试 -------------------
-# if __name__ == "__main__":
-#     data = SpiderDoubanMovieTop250().running()
-#     for i in data:
-#         with open('Douban.txt', 'at', encoding='utf-8') as f:
-#             i = json.dumps(i)
-#             f.write(i)
-#             f.write('\n')
 
 
 def write():
@@ -116,11 +137,26 @@ def read():
         print('输出完成')
 
 
+def insert():
+    db = sql_connect()
+    data = SpiderDoubanMovieTop250().running()
+    count = 0
+    for i in data:
+        information_add = SpiderDouban(url=str(i['url']), title_chinese=str(i['title_chinese']), quote=str(i['quote']),
+                                       director=str(i['director']), year=str(i['year']), country=str(i['country']),
+                                       classify=str(i['classify']), title_others=str(i['title_others']),
+                                       rating_num=str(i['rating_num']), rating_people=str(i['rating_people']))
+        db.add(information_add)
+        db.commit()
+        count += 1
+        print("已插入%s条数据" % count)
+    print("插入完成")
+    db.close()
+
+
 write()
-
+insert()
 read()
-
-
 """ 爬虫方法源码引用自:
 https://github.com/ChangxingJiang/CxSpider/tree/master/spider/Douban_Movie_Top_250
 自修改了python3.8的海象表达式，适用于python3.7"""
