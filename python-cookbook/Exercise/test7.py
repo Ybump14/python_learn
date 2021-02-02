@@ -43,29 +43,17 @@ class AnalysisJson:
         """
         if isinstance(self.data, dict):
             for keys in self.data.keys():
-                if isinstance(self.data.get(keys), dict):
+                # print('*****log :keys %s' % keys)
+                # print('*****log :value type is %s and value is %s' % (type(self.data.get(keys)), self.data.get(keys)))
+                # print(data_key, data_value)
+                if isinstance(self.data.get(keys), (dict, list)):
                     AnalysisJson(self.data.get(keys)).analysis_json(key)
-                elif isinstance(self.data.get(keys), list):
-                    if key == keys:
-                        self.key_list.append(self.data.get(keys))
-                    for arr in self.data.get(keys):
-                        if isinstance(arr, dict):
-                            AnalysisJson(self.data.get(keys)).analysis_json(key)
                 else:
                     if key == keys:
+                        # print('*****log :key "%s"+ is exist,value is "%s"' % (keys, self.data.get(keys)))
                         self.key_list.append(self.data.get(keys))
+                        # print('*****log :key_list value is "%s"' % self.key_list)
         elif isinstance(self.data, list):
             for array in self.data:
                 AnalysisJson(array).analysis_json(key)
         return self.key_list
-
-
-data = {"url": "https://movie.douban.com/subject/1295865/", "title_chinese": "\u71c3\u60c5\u5c81\u6708",
-        "title_others": ["Legends of the Fall", "\u79cb\u65e5\u4f20\u5947", "\u771f\u7231\u4e00\u4e16\u60c5(\u53f0)"],
-        "director": "\u5bfc\u6f14: \u7231\u5fb7\u534e\u00b7\u5179\u5a01\u514b Edward Zwick\u00a0\u00a0\u00a0",
-        "year": 1994, "country": "\u7f8e\u56fd",
-        "classify": ["\u5267\u60c5", "\u7231\u60c5", "\u6218\u4e89", "\u897f\u90e8"], "rating_num": 8.8,
-        "rating_people": 232262,
-        "quote": "\u4f20\u5947\uff0c\u4e0d\u662f\u6bcf\u4e2a\u4eba\u90fd\u53ef\u4ee5\u62e5\u6709\u3002",
-        "title": [{"title_others": "testhuoqu"}]}
-print(AnalysisJson(data).analysis_json('title_others'))
