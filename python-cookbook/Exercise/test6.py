@@ -91,12 +91,12 @@ class SpiderDoubanMovieTop250(tool.abc.SingleSpider):
         return movie_list
 
 
-def write():
+def write_to_json():
     data = SpiderDoubanMovieTop250().running()
     for i in data:
-        with open('Douban.txt', 'at', encoding='utf-8') as f:
+        with open('_Douban.txt', 'at', encoding='utf-8') as f:
             i = json.dumps(i)
-            f.write(i)
+            f.write(format_json(i))
             f.write('\n')
     print('爬取完成')
 
@@ -108,6 +108,12 @@ def read():
             print(line)
         print('输出完成')
 
+def to_json():
+    with open('Douban.txt', 'rt', encoding='utf8') as f:
+        for line in f:
+            # line = json.loads(line)
+            print(format_json(line))
+        print('输出完成')
 
 def insert():
     db = sql_connect()
@@ -126,9 +132,9 @@ def insert():
     db.close()
 
 
-write()
+write_to_json()
 insert()
-read()
+to_json()
 """ 爬虫方法源码引用自:
 https://github.com/ChangxingJiang/CxSpider/tree/master/spider/Douban_Movie_Top_250
 自修改了python3.8的海象表达式，适用于python3.7"""
