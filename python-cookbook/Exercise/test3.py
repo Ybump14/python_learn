@@ -71,16 +71,3 @@ class DateUtil:
         stamp = int(time.mktime(
             time.strptime(str(stamp.replace(hour=23, minute=59, second=59)), "%Y-%m-%d %H:%M:%S"))) * 1000
         return stamp
-
-
-print(DateUtil.dayFirstStamp())
-print(DateUtil.dayLastStamp())
-
-print(DateUtil.monthFirstStamp())
-print(DateUtil.monthLastStamp())
-
-print(DateUtil.lastMonthFirstStamp())
-print(DateUtil.lastMonthLastStamp())
-
-print(DateUtil(2020, 2, 2).monthStamp())
-print(DateUtil(2021, 2, 2).monthStamp())
