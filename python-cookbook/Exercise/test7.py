@@ -27,14 +27,22 @@ def format_json(content):
 class AnalysisJson:
     """解析接口返回json，根据key拿到value"""
 
+    key_list = []
+
     def __init__(self, data):
         self.data = data
-        if isinstance(self.data, str):
-            print('*****log :data is str')
-            self.data = json.loads(self.data)
-            print('*****log :data is converted to dict')
 
-    key_list = []
+    @property
+    def data(self):
+        return self._data
+
+    @data.setter
+    def data(self, value):
+        if isinstance(value, str):
+            print('*****log :data is str')
+            self._data = json.loads(value)
+            print('*****log :data is converted to dict')
+        self._data = value
 
     def analysis_json(self, key):
         """
@@ -43,17 +51,41 @@ class AnalysisJson:
         """
         if isinstance(self.data, dict):
             for keys in self.data.keys():
-                # print('*****log :keys %s' % keys)
-                # print('*****log :value type is %s and value is %s' % (type(self.data.get(keys)), self.data.get(keys)))
-                # print(data_key, data_value)
-                if isinstance(self.data.get(keys), (dict, list)):
-                    AnalysisJson(self.data.get(keys)).analysis_json(key)
-                else:
-                    if key == keys:
-                        # print('*****log :key "%s"+ is exist,value is "%s"' % (keys, self.data.get(keys)))
+                if key == keys:
+                    if isinstance(self.data.get(keys), dict):
+                        AnalysisJson(self.data.get(keys)).analysis_json(key)
+                    elif isinstance(self.data.get(keys), list):
+                        tag = False
+                        for array in self.data.get(keys):
+                            if isinstance(array, dict):
+                                AnalysisJson(array).analysis_json(key)
+                            else:
+                                tag = True
+                        if tag:
+                            self.key_list.append(self.data.get(keys))
+                    else:
                         self.key_list.append(self.data.get(keys))
-                        # print('*****log :key_list value is "%s"' % self.key_list)
         elif isinstance(self.data, list):
             for array in self.data:
-                AnalysisJson(array).analysis_json(key)
+                if isinstance(array, dict):
+                    AnalysisJson(array).analysis_json(key)
         return self.key_list
+
+
+case1 = {
+    "classify": "剧情1",
+}
+case2 = {
+    "classify": ["剧情2", "爱情"],
+}
+case3 = {
+    "classify": [{"classify": "剧情3", "classify1": "爱情"}],
+}
+case4 = {
+    "classify": {"classify": [{"classify": "剧情4", "classify1": "爱情"}]},
+}
+
+# print(AnalysisJson(case1).analysis_json('classify'))
+# print(AnalysisJson(case2).analysis_json('classify'))
+print(AnalysisJson(case3).analysis_json('classify'))
+# print(AnalysisJson(case4).analysis_json('classify'))
