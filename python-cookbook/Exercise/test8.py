@@ -15,47 +15,44 @@ def do():
         print("This isn't a triangle")  # 不是三角形
 
 
-class test:
+class Test_triangle:
 
     def __init__(self, data):
-        data.sort()
-        self.data = data
+        self.data = sorted(data)
         for i in data:
             if not isinstance(i, int):
-                raise TypeError('你输入的边中，存在非整数边')
+                raise TypeError('你输入的第%s条边不是整数' % (data.index(i) + 1))
+            elif i <= 0:
+                raise TypeError('你输入的第%s条边不是正整数' % (data.index(i) + 1))
 
-    def gg(self, a, b, c):
+    def triangle(self, a, b, c):
         if a + b > c:
             return True
         return False
 
-    def hh(self, a, b):
+    def isosceles_triangle(self, a, b):
         if a == b:
             return True
         return False
 
-    def zz(self, a, b, c):
+    def right_triangle(self, a, b, c):
         if a * a + b * b == c * c:
             return True
         return False
 
-    def ab(self):
+    def is_triangle(self):
         a = None
-        if not self.gg(self.data[0], self.data[1], self.data[2]):
+        if not self.triangle(self.data[0], self.data[1], self.data[2]):
             print('不是三角形')
             return
-        if not self.gg(self.data[0], self.data[2], self.data[1]):
-            print('不是三角形')
-            return
-        if not self.gg(self.data[1], self.data[2], self.data[0]):
-            print('不是三角形')
-            return
-        if self.hh(self.data[0], self.data[1]) or self.hh(self.data[1], self.data[2]) or self.hh(self.data[0],
-                                                                                                 self.data[2]):
+        if self.isosceles_triangle(self.data[0], self.data[1]) or \
+                self.isosceles_triangle(self.data[1], self.data[2]) or \
+                self.isosceles_triangle(self.data[0], self.data[2]):
             a = '这是一个等腰三角形'
-        if self.hh(self.data[0], self.data[1]) and self.hh(self.data[1], self.data[2]):
+        if self.isosceles_triangle(self.data[0], self.data[1]) and \
+                self.isosceles_triangle(self.data[1], self.data[2]):
             a = '这是一个等边三角形'
-        if self.zz(self.data[0], self.data[1], self.data[2]):
+        if self.right_triangle(self.data[0], self.data[1], self.data[2]):
             a = '这是一个直角三角形'
         if a:
             print(a)
@@ -63,4 +60,4 @@ class test:
             print('这是一个不规则三角形')
 
 
-test([5, 4, 3]).ab()
+Test_triangle([1, 2, 1]).is_triangle()
