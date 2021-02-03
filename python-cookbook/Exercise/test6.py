@@ -2,10 +2,6 @@ import json
 import re
 import crawlertool as tool
 from bs4 import BeautifulSoup
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, String, Integer
 from test7 import format_json
 from _models import sql_connect, SpiderDouban
 
@@ -101,17 +97,17 @@ def write_to_json():
     print('爬取完成')
 
 
-def read():
-    with open('Douban.txt', 'rt', encoding='utf8') as f:
+def read(filename):
+    with open(filename, 'rt', encoding='utf8') as f:
         for line in f:
-            line = json.loads(line)
+            # line = json.loads(line)
             print(line)
         print('输出完成')
 
-def to_json():
-    with open('Douban.txt', 'rt', encoding='utf8') as f:
+def to_json(filename):
+    with open(filename, 'rt', encoding='utf8') as f:
         for line in f:
-            # line = json.loads(line)
+            line = json.loads(line)
             print(format_json(line))
         print('输出完成')
 
@@ -134,7 +130,7 @@ def insert():
 
 write_to_json()
 insert()
-to_json()
+to_json('Douban.txt')
 """ 爬虫方法源码引用自:
 https://github.com/ChangxingJiang/CxSpider/tree/master/spider/Douban_Movie_Top_250
 自修改了python3.8的海象表达式，适用于python3.7"""
