@@ -17,8 +17,8 @@ k1 = (list(k.keys()))  # 员工重组为一个list
 k3 = {}
 
 
-def new_k3():  # 生成一个礼物重新分配后的新字典方法
-    # k2 = random.sample(list(k.values()), len(list(k.values())))  # 把礼物随机重组为一个list
+# case1
+def case1():  # 生成一个礼物重新分配后的新字典方法
     k2 = list(k.values())  # 礼物重组为一个list
     for i in range(len(k2)):  # 将礼物随机分配给员工，重组为k3
         x = random.choice(k2)
@@ -26,11 +26,21 @@ def new_k3():  # 生成一个礼物重新分配后的新字典方法
         k2.remove(x)
     for i in k1:  # 遍历员工
         if k.get(i) == k3.get(i):  # 随机分配后遍历员工，若存在员工拿到自己原本的礼物，就重新随机，生成新的k3
-            print('存在重复', k3)
-            print('重复的员工和礼物', i, k.get(i), k3.get(i))
-            new_k3()
+            case1()
+    return k3
+
+
+# case2
+def case2():
+    k_staff_random = random.sample(list(k.keys()), len(list(k.keys())))  # 打乱员工排序
+    for n in range(len(k_staff_random)):
+        if n < len(k_staff_random) - 1:
+            k3[k_staff_random[n]] = k.get(k_staff_random[n + 1])
+        else:
+            k3[k_staff_random[n]] = k.get(k_staff_random[0])
     return k3
 
 
 print(k)
-print(new_k3())
+print(case1())
+print(case2())
