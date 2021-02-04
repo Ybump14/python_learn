@@ -39,9 +39,7 @@ class AnalysisJson:
     @data.setter
     def data(self, value):
         if isinstance(value, str):
-            print('*****log :data is str')
             self._data = json.loads(value)
-            print('*****log :data is converted to dict')
         self._data = value
 
     def analysis_json(self, key):
@@ -51,19 +49,20 @@ class AnalysisJson:
         """
         if isinstance(self.data, dict):
             for keys in self.data.keys():
-                if key == keys:
-                    if isinstance(self.data.get(keys), dict):
-                        AnalysisJson(self.data.get(keys)).analysis_json(key)
-                    elif isinstance(self.data.get(keys), list):
-                        tag = False
-                        for array in self.data.get(keys):
-                            if isinstance(array, dict):
-                                AnalysisJson(array).analysis_json(key)
-                            else:
-                                tag = True
-                        if tag:
+                if isinstance(self.data.get(keys), dict):
+                    AnalysisJson(self.data.get(keys)).analysis_json(key)
+                elif isinstance(self.data.get(keys), list):
+                    tag = False
+                    for array in self.data.get(keys):
+                        if isinstance(array, dict):
+                            AnalysisJson(array).analysis_json(key)
+                        else:
+                            tag = True
+                    if tag:
+                        if key == keys:
                             self.key_list.append(self.data.get(keys))
-                    else:
+                else:
+                    if key == keys:
                         self.key_list.append(self.data.get(keys))
         elif isinstance(self.data, list):
             for array in self.data:
@@ -76,16 +75,16 @@ case1 = {
     "classify": "剧情1",
 }
 case2 = {
-    "classify": ["剧情2", "爱情"],
+    "classify": ["剧情2", "爱情2"],
 }
 case3 = {
-    "classify": [{"classify": "剧情3", "classify1": "爱情"}],
+    "classify": [{"classify": "剧情3", "classify1": "爱情3"}],
 }
 case4 = {
-    "classify": {"classify": [{"classify": "剧情4", "classify1": "爱情"}]},
+    "classify": {"classify": [{"classify": "剧情4", "classify1": "爱情4"}]},
 }
 
 # print(AnalysisJson(case1).analysis_json('classify'))
-# print(AnalysisJson(case2).analysis_json('classify'))
-print(AnalysisJson(case3).analysis_json('classify'))
-# print(AnalysisJson(case4).analysis_json('classify'))
+# print(AnalysisJson(case2).analysis_json('classify1'))
+print(AnalysisJson(case3).analysis_json('classify1'))
+# print(AnalysisJson(case4).analysis_json('classify1'))
