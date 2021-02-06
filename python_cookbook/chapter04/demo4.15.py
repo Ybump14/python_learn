@@ -20,8 +20,8 @@ print('\n')
 for c in heapq.merge(a, b, reverse=False):
     print(c, end=' ')  # 1 4 5 1 6 7 10 11
 
-with open('E:\python_learn/python-cookbook/chapterData/python.csv', 'rt') as file1, \
-        open('E:\python_learn/python-cookbook/chapterData/python_test.csv', 'rt') as file2, \
-        open('E:\python_learn/python-cookbook/chapterData/merged_file.csv', 'wt', encoding='utf-8') as outf:
+with open('E:\python_learn/python_cookbook/chapterData/python.csv', 'rt') as file1, \
+        open('E:\python_learn/python_cookbook/chapterData/python_test.csv', 'rt') as file2, \
+        open('E:\python_learn/python_cookbook/chapterData/merged_file.csv', 'wt', encoding='utf-8') as outf:
     for line in heapq.merge(file1, file2):
         outf.write(line)

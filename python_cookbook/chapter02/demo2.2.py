@@ -33,6 +33,6 @@ def read_data(name):
 
 
 url = 'http://www.python.org'
-urls = 'E:\python_learn/python-cookbook/chapter02/demo2.2.py'
+urls = 'E:\python_learn/python_cookbook/chapter02/demo2.2.py'
 read_data(url)  # return 'http://www.python.org' content
 read_data(urls)  # return 'demo2.2.py' content

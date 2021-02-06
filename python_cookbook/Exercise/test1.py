@@ -6,11 +6,11 @@ import os
 
 
 def create_json_file(mkdir, file_name, request_method, request_api, request_name):
-    if os.path.exists("E:\python_learn/python-cookbook/chapterData/" + mkdir):
+    if os.path.exists("E:\python_learn/python_cookbook/chapterData/" + mkdir):
         pass
     else:
-        os.mkdir("E:\python_learn/python-cookbook/chapterData/" + mkdir)
-    with open(("E:\python_learn/python-cookbook/chapterData/" + mkdir + "/") + file_name + ".json", 'wt', encoding="utf-8") as f:
+        os.mkdir("E:\python_learn/python_cookbook/chapterData/" + mkdir)
+    with open(("E:\python_learn/python_cookbook/chapterData/" + mkdir + "/") + file_name + ".json", 'wt', encoding="utf-8") as f:
         data = {
             "request_method": request_method,
             "request_api": request_api,
@@ -22,7 +22,7 @@ def create_json_file(mkdir, file_name, request_method, request_api, request_name
 
 '''读取CSV文件，依照关键字批量生成json文件'''
 
-with open("E:\python_learn/python-cookbook/chapterData/python.csv", 'r') as f:
+with open("E:\python_learn/python_cookbook/chapterData/python.csv", 'r') as f:
     f_csv = csv.DictReader(f)
     for row in f_csv:
         create_json_file(mkdir=row['mkdir'],

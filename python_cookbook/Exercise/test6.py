@@ -129,8 +129,8 @@ def insert():
 
 
 write_to_json()
-insert()
-to_json('Douban.txt')
+# insert()
+# to_json('Douban.txt')
 """ 爬虫方法源码引用自:
 https://github.com/ChangxingJiang/CxSpider/tree/master/spider/Douban_Movie_Top_250
 自修改了python3.8的海象表达式，适用于python3.7"""
