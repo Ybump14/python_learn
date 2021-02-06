@@ -1,4 +1,5 @@
 import random
+import string
 
 '''
 圣诞节到了，公司举行交换礼物活动，参加的员工每人准备一个礼物。
@@ -44,3 +45,13 @@ def case2():
 print(k)
 print(case1())
 print(case2())
+
+
+# python生成100个不重复的4位数随机数
+def gen():
+    x = []
+    while len(x) < 1000:
+        a = "".join([random.choice(string.digits) for i in range(4)])
+        if a not in x:
+            x.append(a)
+    return x
