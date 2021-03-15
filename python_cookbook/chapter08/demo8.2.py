@@ -25,5 +25,5 @@ class Date:
         return fmt.format(d=self)
 
 
-a = Date(2020,12,31)
+a = Date(2020, 12, 31)
 print(format(a))
