@@ -40,11 +40,18 @@ class D(B, C):
 
     def add(self, m):
         print('self is {0} @D.add'.format(self))
-        super(C, self).add(m)
+        super(D, self).add(m)
         self.n += 5
 
 
 print(D.mro())
 d = D()
 d.add(2)
+'''
+self is <__main__.D object at 0x01698AB0> @D.add
+self is <__main__.D object at 0x01698AB0> @B.add
+self is <__main__.D object at 0x01698AB0> @C.add
+self is <__main__.D object at 0x01698AB0> @A.add
+19
+'''
 print(d.n)
