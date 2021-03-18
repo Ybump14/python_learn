@@ -64,6 +64,9 @@ class Evaluator(NodeVisitor):
     def visit_Number(self, node):
         return node.value
 
+    def visit_int(self, value):
+        return value
+
     def visit_Add(self, node):
         return self.visit(node.left) + self.visit(node.right)
 
@@ -84,12 +87,10 @@ t1 = Add(Number(3), Number(4))
 t2 = Sub(Number(3), Number(4))
 t3 = Mul(Number(3), Number(4))
 t4 = Div(3, 4)
-print(t4.left)
-print(t4.right)
 t5 = Negate(-3)
 e = Evaluator()
-print(e.visit(t1))
-print(e.visit(t2))
-print(e.visit(t3))
-# print(e.visit(t4))
-print(e.visit(t5))
+print(e.visit(t1))  # 3+4
+print(e.visit(t2))  # 3-4
+print(e.visit(t3))  # 3*4
+print(e.visit(t4))  # 3/4
+print(e.visit(t5))  # 3-
