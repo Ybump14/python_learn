@@ -83,6 +83,43 @@ class Evaluator(NodeVisitor):
         return -node.operand
 
 
+class StackCode(NodeVisitor):
+    def generate_code(self, node):
+        self.instructions = []
+        self.visit(node)
+        return self.instructions
+
+    def visit_Number(self, node):
+        self.instructions.append(('PUSH', node.value))
+
+    def visit_int(self, value):
+        self.instructions.append(value)
+
+    def binop(self, node, instruction):
+        self.visit(node.left)
+        self.visit(node.right)
+        self.instructions.append((instruction,))
+
+    def visit_Add(self, node):
+        self.binop(node, 'ADD')
+
+    def visit_Sub(self, node):
+        self.binop(node, 'SUB')
+
+    def visit_Mul(self, node):
+        self.binop(node, 'MUL')
+
+    def visit_Div(self, node):
+        self.binop(node, 'DIV')
+
+    def unaryop(self, node, instruction):
+        self.visit(node.operand)
+        self.instructions.append((instruction,))
+
+    def visit_Negate(self, node):
+        self.unaryop(node, 'NEG')
+
+
 t1 = Add(Number(3), Number(4))
 t2 = Sub(Number(3), Number(4))
 t3 = Mul(Number(3), Number(4))
@@ -94,3 +131,7 @@ print(e.visit(t2))  # 3-4
 print(e.visit(t3))  # 3*4
 print(e.visit(t4))  # 3/4
 print(e.visit(t5))  # 3-
+
+s = StackCode()
+print(s.generate_code(t3), 'StockCode t3')
+print(s.generate_code(t4), 'StockCode t4')
