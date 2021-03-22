@@ -16,7 +16,7 @@ class Node:
         self.children = []
 
     def __repr__(self):
-        return 'Node({!r})'.format(self.value)
+        return 'Node({!r}),parent({!r})'.format(self.value, self.parent)
 
     @property
     def parent(self):
@@ -33,12 +33,5 @@ class Node:
 
 root = Node('parent')
 c1 = Node('child')
-print(c1.value)
-print(c1.parent)
-print(c1.children)
-
-
 root.add_child(c1)
-print(c1.value)
-print(c1.parent)
-print(c1.children)
+print(c1)
