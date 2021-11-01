@@ -32,6 +32,7 @@ data17 = b'232642104400044d51545404c2003c001d31303738303635343931333937323538333
 data18 = b'232642309f0100175055422f45503530302f323130313030303030313336390101100bb8003e7c0000000100000000000000010000000000000000000000010000000100000034004f00000000000a00000000000000060000000c0000000c000000060000150a1d10360800000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000050c5e'
 data19 = b'23264230990200175055422f45503530302f323130313030303030313336390101100046007bf6000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001141a0003000c004200000001141a00000000006403e802260320014101410141014101410141014101410141013f0141014101410141014101410000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010001000000001f2e'
 
+
 def hex_list():
     test = []
     i = 0
@@ -47,30 +48,37 @@ def hex_list():
     return test
 
 
-def decode(data):
+def decode1(data):
     data_str = str(binascii.a2b_hex(data))
     for x in hex_list():
         data_str = data_str.replace('b\'', '').replace('\'', '').replace('\\n', '').replace('\\r', '').replace('\\' + x,
-                                                                                                               '')
+                                                                                                               '').lstrip('#&BD0')
     return data_str
 
 
-print(decode(data1))
-print(decode(data2))
-print(decode(data3))
-print(decode(data4))
-print(decode(data5))
-print(decode(data6))
-print(decode(data7))
-print(decode(data8))
-print(decode(data9))
-print(decode(data10))
-print(decode(data11))
-print(decode(data12))
-print(decode(data13))
-print(decode(data14))
-print(decode(data15))
-print(decode(data16))
-print(decode(data17))
-print(decode(data18))
-print(decode(data19))
+def decode2(data):
+    data_str = str(binascii.a2b_hex(data))
+
+    return data_str
+
+
+print(decode1(data1))
+print(decode1(data2))
+print(decode1(data3))
+print(decode1(data4))
+print(decode1(data5))
+print(decode1(data6))
+print(decode1(data7))
+print(decode1(data8))
+print(decode1(data9))
+print(decode1(data10))
+print(decode1(data11))
+print(decode1(data12))
+print(decode1(data13))
+print(decode1(data14))
+print(decode1(data15))
+print(decode1(data16))
+print(decode1(data17))
+print(decode1(data18))
+print(decode1(data19))
+print(decode2(data19))
