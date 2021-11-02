@@ -29,4 +29,10 @@ def message_CN(rec_str):
             break
     if rec_str == '#&B':
         rec_str = '心跳包'
+    if 'PUB' in rec_str:
+        rec_str = 'PUB' + rec_str.split('PUB')[1]
+    if 'IOT' in rec_str:
+        rec_str = 'IOT' + rec_str.split('IOT')[1]
+    if 'MQTT' in rec_str:
+        rec_str = 'MQTT' + rec_str.split('MQTT')[1]
     return rec_str

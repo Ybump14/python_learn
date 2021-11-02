@@ -6,6 +6,7 @@
 """
 # !/usr/bin/python
 # -*-coding: utf-8 -*-
+import re
 from time import sleep
 
 import serial
@@ -41,13 +42,53 @@ class SerialPort:
             if count > 0:
                 rec_str = self.port.read(count)
                 rec_str = binascii.b2a_hex(rec_str)
-                rec_str = decode(rec_str)
-                rec_str = message_CN(rec_str)
+                str_data = str(rec_str).replace('b\'', '').replace('\'', '')
+                if "010110" in str_data:
+                    ascii = str_data.split('010110')[0]
+                    rec_str = decode(ascii)
+                    rec_str = message_CN(rec_str)
+                else:
+                    rec_str = decode(rec_str)
+                    rec_str = message_CN(rec_str)
                 if self.type == '发送串口 指令':
                     print(str(datetime.now()), ':', "\033[31;1m" + self.type + "\033[0m", rec_str)
                 elif self.type == '接收串口 指令':
                     print(str(datetime.now()), ':', "\033[32;1m" + self.type + "\033[0m", rec_str)
                 sleep(0.02)
+                write(rec_str, self.type)
+
+
+def write(rec_str, type):
+    with open('pyserial.log', 'a+', encoding='utf-8', newline='') as f:
+        f.write(str(datetime.now()) + ' ' + type + ':' + rec_str)
+        f.write('\n')
+
+
+def modbus_decode(data):
+    # 获取寄存器写入起始位
+    data_start = data[0:4]
+    data_start_register = int(data_start, 16)
+
+    # 获取寄存器写入数量
+    data_read_len = data[4:8]
+
+    # 获取寄存器写入字节数
+    data_read_len_bytes = data[8:10]
+    data_read_len_bytes_len = int(data_read_len_bytes, 16)
+
+    # modbus串
+    data_modbus = data[10:10 + data_read_len_bytes_len]
+    data_modbus_list = re.findall(".{2}", data_modbus)
+
+    if data_start_register == 0:
+        print(str(datetime.now()), ':', "\033[31;1m" + '发送串口 指令' + "\033[0m", '上报基本数据',
+              '010110' + data_start + data_read_len + data_read_len_bytes + data_modbus, data_modbus_list)
+    elif data_start_register == 70:
+        print(str(datetime.now()), ':', "\033[31;1m" + '发送串口 指令' + "\033[0m", '上报附加数据',
+              '010110' + data_start + data_read_len + data_read_len_bytes + data_modbus, data_modbus_list)
+    elif data_start_register == 3000:
+        print(str(datetime.now()), ':', "\033[31;1m" + '发送串口 指令' + "\033[0m", '上报可读写数据',
+              '010110' + data_start + data_read_len + data_read_len_bytes + data_modbus, data_modbus_list)
 
 
 def hex_list():
