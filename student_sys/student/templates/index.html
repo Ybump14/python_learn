@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学员管理系统-by the5fire</title>
+</head>
+<body>
+<h3><a href="/admin/">Admin</a></h3>
+<ul>
+    {% for student in students %}
+        <li>{{ student.name }} - {{ student.get_sex_display }} - {{ student.qq }} - {{ student.phone }} - {{ student.email }} -{{ student.profession }}
+            - {{ student.created_time }} - {{ student.get_status_display }}</li>
+        {% empty %}
+        <li>没有学生</li>
+    {% endfor %}
+</ul>
+
+<hr/>
+<form action="/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit"/>
+</form>
+</body>
+</html>
